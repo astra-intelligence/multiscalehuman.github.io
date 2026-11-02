@@ -221,7 +221,7 @@ describe('mhu-cube styles', () => {
   });
 
   it('desktop content precedes the visualization and selected details use a card', () => {
-    expect(styles).toMatch(/grid-template-columns: minmax\(22rem, clamp\(28rem, 31%, 35rem\)\) minmax\(0, 1fr\)/);
+    expect(styles).toMatch(/grid-template-columns: minmax\(22rem, clamp\(28rem, 36%, 35rem\)\) minmax\(0, 1fr\)/);
     expect(styles).toMatch(/grid-template-rows: minmax\(0, 1fr\)/);
     expect(styles).toMatch(/grid-template-areas: "content stage"/);
     expect(styles).toMatch(
