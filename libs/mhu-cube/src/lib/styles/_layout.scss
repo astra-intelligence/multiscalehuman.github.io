@@ -1,6 +1,7 @@
 @use 'tokens' as t;
 
-/* Spacing scales with the host's width (cqw), like the layout breakpoints, not with the browser window. */
+/* Spacing scales with the host's width (cqw), like the layout breakpoints, not with the browser window. The page
+   owns the inline gutters, so the content column and the plot reach the host's left and right edges. */
 .mhu-cube {
   display: grid;
   /* The content column widens with the host up to 35rem, keeping its earlier 28rem on narrower desktops. */
@@ -9,9 +10,12 @@
   grid-template-areas: 'content stage';
   gap: clamp(1.5rem, 3cqw, 4rem);
   width: 100%;
-  height: 100%;
+  /* Pages size the graph through the public graph-height hook rather than the host's height: an element can't query
+     its own width, so a fixed host height would also bind the compact layout, which ignores the hook. The minimum
+     keeps the introduction and the selected card from overflowing. */
+  height: t.public-slot(graph-height, 100%);
   min-height: 36rem;
-  padding: clamp(1.5rem, 3cqw, 3rem);
+  padding: clamp(1.5rem, 3cqw, 3rem) 0;
   overflow: visible;
   background: t.slot(surface);
 }
@@ -32,13 +36,14 @@
   grid-template-rows: minmax(0, 1fr) auto;
   min-width: 0;
   min-height: 0;
-  container-type: size;
+  container: mhu-cube-stage / size;
   place-items: center;
 }
 /* The frame, blocks, and label anchors share a drawing area shaped like the camera's frame (--_area-ratio, set by
    the element from geometry/view.ts), so the frame touches all four sides. Labels hang into rem gutters around the
-   area, so they keep their room at any size. The plot is as large as the stage allows. Space labels run off the
-   right floor edge and organ labels sit below the front edge, so those gutters are the deepest. */
+   area, so they keep their room at any size. The plot is as large as the stage allows, and it sits at the stage's
+   right edge so it lines up with the page content above it. Space labels run off the right floor edge and organ
+   labels sit below the front edge, so those gutters are the deepest. */
 .mhu-cube__plot {
   @include t.set(gutter-top, 0.5rem);
   @include t.set(gutter-right, 6rem);
@@ -53,6 +58,7 @@
     'min(100cqw, calc((100cqh - #{t.slot(gutter-y)}) / #{t.slot(area-ratio, 1)} + #{t.slot(gutter-x)}))'
   );
   position: relative;
+  justify-self: end;
   width: t.slot(plot-width);
   height: calc((t.slot(plot-width) - t.slot(gutter-x)) * t.slot(area-ratio, 1) + t.slot(gutter-y));
 }
