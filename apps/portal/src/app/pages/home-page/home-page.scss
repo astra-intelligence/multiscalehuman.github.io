@@ -9,14 +9,14 @@
     box-sizing: border-box;
     max-width: 100rem;
     margin: 0 auto;
-    padding: 0 1.5rem;
+    padding: 1.5rem;
     overflow-x: clip;
 
     @include ds.breakpoint(medium) {
-      padding-inline: 2.5rem;
+      padding: 2.5rem;
     }
 
-    // The graph fills one screen; the dataset cards that replace it at 64rem and below set their own height.
+    // The dataset cards that replace the graph at 64rem and below ignore this hook.
     mhu-cube {
       --mhu-cube-graph-height: 100svh;
     }
