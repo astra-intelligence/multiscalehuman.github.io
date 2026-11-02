@@ -4,9 +4,8 @@
 
 /// The drawing area's size, in both directions, from which the axis labels step up one type role.
 $_large-plot: 40rem;
-/// Label gutters for the larger labels, replacing the `.mhu-cube__plot` gutters in `_layout.scss`. The time title
-/// widens the left gutter, the taller organ row deepens the bottom one, and the space title's longer push needs a
-/// little more room on the right.
+/// Gutters for the larger labels. The time title needs more room on the left, the taller organ row more below, and
+/// the space title's longer push a little more on the right.
 $_large-gutters: (
   top: 0.5rem,
   right: 6.5rem,
@@ -16,8 +15,7 @@ $_large-gutters: (
 $_large-stage-width: $_large-plot + map.get($_large-gutters, left) + map.get($_large-gutters, right);
 $_large-stage-height: $_large-plot + map.get($_large-gutters, top) + map.get($_large-gutters, bottom);
 
-/* Large plots step the axis labels up one type role, so they keep their proportion to the plot without ever shrinking
-   below the base roles. The stage loses its size containment in the compact layout, so this never applies there. */
+/* The stage loses its size containment in the compact layout, so this never applies there. */
 @container mhu-cube-stage (min-width: #{$_large-stage-width}) and (min-height: #{$_large-stage-height}) {
   .mhu-cube__plot {
     @each $side, $size in $_large-gutters {
