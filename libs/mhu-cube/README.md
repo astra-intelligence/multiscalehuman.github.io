@@ -9,7 +9,7 @@ When its container is wider than `64rem`, the component keeps its introduction v
 - The element is a framework-neutral custom element with no runtime dependencies. It doesn't import Angular, so it can also be used outside the portal.
 - The element renders into the light DOM, so the page includes its stylesheet and the site's own stylesheets can restyle its parts. See [Styles](#styles).
 - Vitest specs run in jsdom and cover validation, projection, the details transition, the copy rules, the stylesheet rules, and the element's rendering, accessibility, keyboard, and event behavior. The workspace requires 85% coverage.
-- jsdom has no layout, so geometry, computed styles, hit testing, and responsive behavior are checked by a [manual browser harness](#development). It isn't run in CI. One harness check currently fails: the harness renders with system fonts instead of Roboto, which makes the “Time (years)” title slightly wider than its `6rem` gutter.
+- jsdom has no layout, so geometry, computed styles, hit testing, and responsive behavior are checked by a [manual browser harness](#development). It isn't run in CI. The harness doesn't load Roboto, so on machines without it installed, the fallback font can make the “Time (years)” title slightly wider than its `6rem` gutter and fail the axis label check.
 - The portal shows sample datasets with placeholder metadata links until dataset metadata pages exist.
 
 ## Library contents
