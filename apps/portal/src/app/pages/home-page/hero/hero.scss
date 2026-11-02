@@ -1,11 +1,15 @@
+@use 'sass:map';
 @use '@atlasng/design-system' as ds;
+@use '../../../../styles/theme';
+
+$_text-color: map.get(theme.$primary-palette, secondary, 100);
 
 :host {
   position: relative;
   display: flex;
   align-items: center;
-  background-color: #333f48;
-  color: white;
+  background-color: map.get(theme.$primary-palette, secondary, 40);
+  color: $_text-color;
   padding: 5.5rem 1.5rem;
   overflow: clip;
   view-timeline: --hero block;
@@ -48,13 +52,13 @@
 
   @include ds.breadcrumbs-overrides(
     (
-      crumb-color: white,
-      separator-color: white,
+      crumb-color: $_text-color,
+      separator-color: $_text-color,
     )
   );
   @include ds.text-link-overrides(
     (
-      color: white,
+      color: $_text-color,
     )
   );
 }
