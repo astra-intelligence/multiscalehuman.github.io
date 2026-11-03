@@ -34,6 +34,23 @@ describe('HraEui', () => {
     expect(scripts[0]).toHaveAttribute('type', 'module');
   });
 
+  it('removes the EUI stylesheet with the last EUI, keeping the script', async () => {
+    const { fixture, rerender } = await render(
+      `<mhu-hra-eui />
+       @if (showSecond) {
+         <mhu-hra-eui />
+       }`,
+      { imports: [HraEui], componentProperties: { showSecond: true } },
+    );
+
+    await rerender({ componentProperties: { showSecond: false } });
+    expect(euiTags().stylesheets).toHaveLength(1);
+
+    fixture.destroy();
+    expect(euiTags().stylesheets).toHaveLength(0);
+    expect(euiTags().scripts).toHaveLength(1);
+  });
+
   it('shows a loading placeholder until the EUI scrolls into view', async () => {
     const { container } = await render(HraEui);
 
@@ -51,10 +68,12 @@ describe('HraEui', () => {
     expect(eui['disableScreenSizeNotice']).toBe(true);
   });
 
-  it('leaves the data sources unset by default', async () => {
+  it('defaults the data sources to the CIFAR registrations', async () => {
     const eui = await renderEui();
 
-    expect(eui['dataSources']).toBeUndefined();
+    expect(eui['dataSources']).toEqual([
+      'https://hubmapconsortium.github.io/hra-registrations/cifar/rui_locations.jsonld',
+    ]);
   });
 
   it('passes the data sources to the EUI', async () => {

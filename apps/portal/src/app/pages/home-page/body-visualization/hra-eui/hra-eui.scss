@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid ds.sys-slot(outline-variant);
+  border: 1px solid ds.sys-slot(outline);
   overflow: hidden;
 
   ccf-eui {
@@ -68,6 +68,8 @@
     ::ng-deep .page-content {
       --scrollbar-thumb-color: #{ds.sys-slot(on-surface-variant)};
 
+      // An explicit width keeps the max height from narrowing the grid, so the middle panel keeps growing.
+      width: 100%;
       min-height: 24.375rem;
       max-height: 67.5rem;
       aspect-ratio: 1520 / 800;

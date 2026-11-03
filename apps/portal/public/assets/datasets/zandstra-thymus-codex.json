@@ -62,10 +62,10 @@
           ]
         },
         {
-          "component": "Embed",
+          "component": "CellDistanceExplorer",
           "config": {
-            "id": "cell-distance-explorer",
-            "label": "Cell Distance Explorer visualization of the thymus"
+            "nodes": "assets/datasets/zandstra-thymus-codex-cde.csv",
+            "nodeTargetSelector": "Endothelial cells"
           }
         }
       ]

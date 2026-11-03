@@ -41,13 +41,13 @@ export const CITE_DEFINITION = {
 } satisfies ContentDefinition;
 
 /**
- * `Embed`: embedded content, such as a visualization, shown as a placeholder for now. Config: `id` (machine ID) and
- * `label` (accessible name).
+ * `CellDistanceExplorer`: the HRA Cell Distance Explorer. Config: `nodes` (nodes CSV URL relative to the app's base
+ * URL) and `nodeTargetSelector` (exact anchor cell type).
  */
-export const EMBED_DEFINITION = {
-  name: 'Embed',
-  component: () => import('./embed').then((m) => m.Embed),
-  config: { id: stringSchema, label: stringSchema },
+export const CELL_DISTANCE_EXPLORER_DEFINITION = {
+  name: 'CellDistanceExplorer',
+  component: () => import('./cell-distance-explorer/cell-distance-explorer').then((m) => m.CellDistanceExplorer),
+  config: { nodes: stringSchema, nodeTargetSelector: stringSchema },
 } satisfies ContentDefinition;
 
 /**
@@ -66,6 +66,6 @@ export const PORTAL_DEFINITIONS: ContentDefinition[] = [
   LIST_DEFINITION,
   LIST_ITEM_DEFINITION,
   CITE_DEFINITION,
-  EMBED_DEFINITION,
+  CELL_DISTANCE_EXPLORER_DEFINITION,
   IMAGE_DEFINITION,
 ];
